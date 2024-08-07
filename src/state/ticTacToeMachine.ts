@@ -9,13 +9,24 @@ function assertEvent<TEvent extends EventObject, Type extends TEvent['type']>(
   }
 }
 
-type Player = 'x' | 'o';
+type StateContext = {
+  board: Array<Player | null>;
+  moves: number;
+  player: Player;
+  winner: Player | undefined;
+  draw: boolean;
+  lastMoveTimestamp: number;
+};
 
-const context = {
+export type Player = 'x' | 'o';
+
+const context: StateContext = {
   board: Array(9).fill(null) as Array<Player | null>,
   moves: 0,
   player: 'x' as Player,
   winner: undefined as Player | undefined,
+  draw: false,
+  lastMoveTimestamp: Date.now(),
 };
 
 export const ticTacToeMachine = createMachine(
@@ -23,7 +34,10 @@ export const ticTacToeMachine = createMachine(
     initial: 'playing',
     types: {} as {
       context: typeof context;
-      events: { type: 'PLAY'; value: number } | { type: 'RESET' };
+      events:
+        | { type: 'PLAY'; value: number }
+        | { type: 'RESET' }
+        | { type: 'TIMEOUT' };
     },
     context,
     states: {
@@ -31,15 +45,36 @@ export const ticTacToeMachine = createMachine(
         always: [
           { target: 'gameOver.winner', guard: 'checkWin' },
           { target: 'gameOver.draw', guard: 'checkDraw' },
+          { target: 'inactivity', guard: 'isInactivity' },
         ],
         on: {
           PLAY: [
             {
               target: 'playing',
               guard: 'isValidMove',
-              actions: 'updateBoard',
+              actions: ['updateBoard', 'resetInactivityTimer'],
             },
           ],
+          TIMEOUT: {
+            target: 'inactivity',
+          },
+        },
+      },
+      inactivity: {
+        after: {
+          30000: {
+            target: 'inactivity',
+          },
+        },
+        on: {
+          PLAY: {
+            target: 'playing',
+            actions: ['updateBoard', 'resetInactivityTimer'],
+          },
+          RESET: {
+            target: 'playing',
+            actions: 'resetGame',
+          },
         },
       },
       gameOver: {
@@ -73,10 +108,21 @@ export const ticTacToeMachine = createMachine(
         },
         moves: ({ context }) => context.moves + 1,
         player: ({ context }) => (context.player === 'x' ? 'o' : 'x'),
+        lastMoveTimestamp: () => Date.now(),
       }),
-      resetGame: assign(context),
+      resetGame: assign({
+        board: Array(9).fill(null) as Array<Player | null>,
+        moves: 0,
+        player: 'x' as Player,
+        winner: undefined as Player | undefined,
+        draw: false,
+        lastMoveTimestamp: Date.now(),
+      }),
       setWinner: assign({
         winner: ({ context }) => (context.player === 'x' ? 'o' : 'x'),
+      }),
+      resetInactivityTimer: assign({
+        lastMoveTimestamp: () => Date.now(),
       }),
     },
     guards: {
@@ -94,34 +140,21 @@ export const ticTacToeMachine = createMachine(
         ];
 
         for (const line of winningLines) {
-          const xWon = line.every((index) => {
-            return board[index] === 'x';
-          });
+          const xWon = line.every((index) => board[index] === 'x');
+          if (xWon) return true;
 
-          if (xWon) {
-            return true;
-          }
-
-          const oWon = line.every((index) => {
-            return board[index] === 'o';
-          });
-
-          if (oWon) {
-            return true;
-          }
+          const oWon = line.every((index) => board[index] === 'o');
+          if (oWon) return true;
         }
-
         return false;
       },
-      checkDraw: ({ context }) => {
-        return context.moves === 9;
-      },
+      checkDraw: ({ context }) => context.moves === 9,
       isValidMove: ({ context, event }) => {
-        if (event.type !== 'PLAY') {
-          return false;
-        }
-
+        if (event.type !== 'PLAY') return false;
         return context.board[event.value] === null;
+      },
+      isInactivity: ({ context }) => {
+        return Date.now() - context.lastMoveTimestamp > 30000;
       },
     },
   }
