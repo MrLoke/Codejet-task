@@ -4,7 +4,7 @@
 
 ## About the project 📝
 
-My approach to the project structure stems from my previous work, among other things. All files are placed in appropriate directories. I could also make a folder with constant variables, but I didn't see the need here, since it's a small project. Unfortunately, I did not have time to improve the unit tests, but you can still review their code.
+My approach to the project structure stems from my previous work, among other things. All files are placed in appropriate directories. I could also make a folder with constant variables, but I didn't see the need here, since it's a small project. Unfortunately, I did not have time to improve the unit tests, but you can still review their code. For your awareness, the game goes into idle state after 30 seconds if the player does not make any move.
 
 ## Tech stack 🧑‍💻
 
