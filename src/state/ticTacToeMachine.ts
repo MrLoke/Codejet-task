@@ -1,62 +1,62 @@
-import { EventObject, createMachine, assign } from "xstate";
+import { EventObject, createMachine, assign } from 'xstate';
 
-function assertEvent<TEvent extends EventObject, Type extends TEvent["type"]>(
+function assertEvent<TEvent extends EventObject, Type extends TEvent['type']>(
   ev: TEvent,
   type: Type
 ): asserts ev is Extract<TEvent, { type: Type }> {
   if (ev.type !== type) {
-    throw new Error("Unexpected event type.");
+    throw new Error('Unexpected event type.');
   }
 }
 
-type Player = "x" | "o";
+type Player = 'x' | 'o';
 
 const context = {
   board: Array(9).fill(null) as Array<Player | null>,
   moves: 0,
-  player: "x" as Player,
+  player: 'x' as Player,
   winner: undefined as Player | undefined,
 };
 
 export const ticTacToeMachine = createMachine(
   {
-    initial: "playing",
+    initial: 'playing',
     types: {} as {
       context: typeof context;
-      events: { type: "PLAY"; value: number } | { type: "RESET" };
+      events: { type: 'PLAY'; value: number } | { type: 'RESET' };
     },
     context,
     states: {
       playing: {
         always: [
-          { target: "gameOver.winner", guard: "checkWin" },
-          { target: "gameOver.draw", guard: "checkDraw" },
+          { target: 'gameOver.winner', guard: 'checkWin' },
+          { target: 'gameOver.draw', guard: 'checkDraw' },
         ],
         on: {
           PLAY: [
             {
-              target: "playing",
-              guard: "isValidMove",
-              actions: "updateBoard",
+              target: 'playing',
+              guard: 'isValidMove',
+              actions: 'updateBoard',
             },
           ],
         },
       },
       gameOver: {
-        initial: "winner",
+        initial: 'winner',
         states: {
           winner: {
-            tags: "winner",
-            entry: "setWinner",
+            tags: 'winner',
+            entry: 'setWinner',
           },
           draw: {
-            tags: "draw",
+            tags: 'draw',
           },
         },
         on: {
           RESET: {
-            target: "playing",
-            actions: "resetGame",
+            target: 'playing',
+            actions: 'resetGame',
           },
         },
       },
@@ -66,17 +66,17 @@ export const ticTacToeMachine = createMachine(
     actions: {
       updateBoard: assign({
         board: ({ context, event }) => {
-          assertEvent(event, "PLAY");
+          assertEvent(event, 'PLAY');
           const updatedBoard = [...context.board];
           updatedBoard[event.value] = context.player;
           return updatedBoard;
         },
         moves: ({ context }) => context.moves + 1,
-        player: ({ context }) => (context.player === "x" ? "o" : "x"),
+        player: ({ context }) => (context.player === 'x' ? 'o' : 'x'),
       }),
       resetGame: assign(context),
       setWinner: assign({
-        winner: ({ context }) => (context.player === "x" ? "o" : "x"),
+        winner: ({ context }) => (context.player === 'x' ? 'o' : 'x'),
       }),
     },
     guards: {
@@ -95,7 +95,7 @@ export const ticTacToeMachine = createMachine(
 
         for (const line of winningLines) {
           const xWon = line.every((index) => {
-            return board[index] === "x";
+            return board[index] === 'x';
           });
 
           if (xWon) {
@@ -103,7 +103,7 @@ export const ticTacToeMachine = createMachine(
           }
 
           const oWon = line.every((index) => {
-            return board[index] === "o";
+            return board[index] === 'o';
           });
 
           if (oWon) {
@@ -117,7 +117,7 @@ export const ticTacToeMachine = createMachine(
         return context.moves === 9;
       },
       isValidMove: ({ context, event }) => {
-        if (event.type !== "PLAY") {
+        if (event.type !== 'PLAY') {
           return false;
         }
 
