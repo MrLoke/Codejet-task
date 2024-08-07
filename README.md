@@ -1,10 +1,10 @@
-# Codejet recruitment task 🔥
+# Codejet recruitment task
 
 ## Live demo 👉 [https://codejet-recruitment-task.netlify.app/](https://codejet-recruitment-task.netlify.app/).
 
 ## About the project 📝
 
-My approach to the project structure stems from my previous work, among other things. All files are placed in appropriate directories. I could also make a folder with constant variables, but I didn't see the need here, since it's a small project.
+My approach to the project structure stems from my previous work, among other things. All files are placed in appropriate directories. I could also make a folder with constant variables, but I didn't see the need here, since it's a small project. Unfortunately, I did not have time to improve the unit tests, but you can still review their code.
 
 ## Tech stack 🧑‍💻
 
@@ -26,7 +26,7 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:5173/](http://localhost:5173/) to view it in the browser.
 
-### `npm run test`
+### `npm test or npm run test`
 
 Launches the test runner in the interactive watch mode.\
 
