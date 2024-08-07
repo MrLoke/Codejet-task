@@ -1,6 +1,6 @@
 import { ThemeProvider } from 'styled-components';
 import { AppContainer } from './LayoutStyled';
-import { theme } from 'src/theme/theme';
+import { GlobalStyle, theme } from 'src/theme/theme';
 
 type Props = {
   children: React.ReactNode;
@@ -9,6 +9,7 @@ type Props = {
 export const Layout = ({ children }: Props) => {
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
       <AppContainer>{children}</AppContainer>
     </ThemeProvider>
   );
