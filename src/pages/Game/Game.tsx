@@ -1,21 +1,12 @@
-import React from 'react';
-import { useMachine } from '@xstate/react';
-import { ticTacToeMachine } from 'src/state/ticTacToeMachine';
-import { GameStatus } from 'src/components/GameStatus/GameStatus';
+import './styles.css';
 import { GameBoard } from 'src/components/GameBoard/GameBoard';
-import { ResetButton } from 'src/components/ResetButton/ResetButton';
+import { GameTitle, GameWrapper } from './GameStyled';
 
-export const Game: React.FC = () => {
-  const [state, send] = useMachine(ticTacToeMachine);
-
+export const Game = () => {
   return (
-    <>
-      <GameStatus state={state} />
-      <GameBoard
-        board={state.context.board.map((cell) => (cell !== null ? cell : ''))}
-        send={send}
-      />
-      <ResetButton send={send} />
-    </>
+    <GameWrapper>
+      <GameTitle>Tic-Tac-Toe Game</GameTitle>
+      <GameBoard />
+    </GameWrapper>
   );
 };
