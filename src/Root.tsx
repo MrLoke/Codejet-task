@@ -1,7 +1,7 @@
 import { Layout } from './layout/Layout';
 
 type Props = {
-  children?: React.ReactNode;
+  children: React.ReactNode;
 };
 
 export const Root = ({ children }: Props) => {
