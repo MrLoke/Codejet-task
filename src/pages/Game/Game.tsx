@@ -1,4 +1,3 @@
-import './styles.css';
 import { GameBoard } from 'src/components/GameBoard/GameBoard';
 import { GameTitle, GameWrapper } from './GameStyled';
 
