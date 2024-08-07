@@ -10,6 +10,7 @@ My approach to the project structure stems from my previous work, among other th
 
 - React.js
 - TypeScript
+- XState
 - styled-components
 - React-router-dom
 - React testing library
