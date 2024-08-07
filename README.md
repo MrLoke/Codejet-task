@@ -29,10 +29,10 @@ Open [http://localhost:5173/](http://localhost:5173/) to view it in the browser.
 
 ### `npm test or npm run test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode.
 
 ### `npm run build`
 
-Builds the app for production to the `dist` folder.\
+Builds the app for production to the `dist` folder.
 
 **Note: If any given functionality does not work properly, it is due to my misinterpretation of how it should work properly.**
