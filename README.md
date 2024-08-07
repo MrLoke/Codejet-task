@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
+# Codejet recruitment task 🔥
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live demo 👉 [https://codejet-recruitment-task.netlify.app/](https://codejet-recruitment-task.netlify.app/).
 
-Currently, two official plugins are available:
+## Rzeczy dodane ode mnie 📝
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Handling non-existent routes
 
-## Expanding the ESLint configuration
+## Tech stack 🧑‍💻
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React.js
+- TypeScript
+- styled-components
+- React-router-dom
+- Vite + React plugin
+- Netlify hosting
 
-- Configure the top-level `parserOptions` property like this:
+## How to run project
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+In the project directory, you can run:
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### `npm run dev`
+
+Runs the app in the development mode.\
+Open [http://localhost:5173/](http://localhost:5173/) to view it in the browser.
+
+### `npm run test`
+
+Launches the test runner in the interactive watch mode.\
+
+### `npm run build`
+
+Builds the app for production to the `dist` folder.\
+
+**Note: Jeśli jakaś dana funkcjonalność źle działa to przez moje złe zinterpretowanie jak to powinno poprawnie działać.**
