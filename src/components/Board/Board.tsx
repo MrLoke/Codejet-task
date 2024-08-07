@@ -9,8 +9,6 @@ type Props = {
 };
 
 export const Board = ({ onClick, player }: Props) => {
-  console.log('player', player);
-
   return (
     <Grid>
       {rangeArray(0, 9).map((index) => {

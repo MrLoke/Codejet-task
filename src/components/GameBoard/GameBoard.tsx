@@ -15,8 +15,6 @@ export const GameBoard = () => {
   const [state, send] = useMachine(ticTacToeMachine);
   const timeoutRef = useRef<number | null>(null);
   const isFirstRender = useRef<boolean>(true);
-  console.log('timeoutRef', timeoutRef.current);
-  console.log('isFirstRender', isFirstRender.current);
 
   const player = useMemo(
     () => state.context.board.map((value) => value ?? null),
