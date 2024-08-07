@@ -2,9 +2,9 @@
 
 ## Live demo 👉 [https://codejet-recruitment-task.netlify.app/](https://codejet-recruitment-task.netlify.app/).
 
-## Rzeczy dodane ode mnie 📝
+## About the project 📝
 
-- Handling non-existent routes
+My approach to the project structure stems from my previous work, among other things. All files are placed in appropriate directories. I could also make a folder with constant variables, but I didn't see the need here, since it's a small project.
 
 ## Tech stack 🧑‍💻
 
@@ -12,10 +12,12 @@
 - TypeScript
 - styled-components
 - React-router-dom
+- React testing library
+- Jest
 - Vite + React plugin
 - Netlify hosting
 
-## How to run project
+## How to run project ⚙️
 
 In the project directory, you can run:
 
@@ -32,4 +34,4 @@ Launches the test runner in the interactive watch mode.\
 
 Builds the app for production to the `dist` folder.\
 
-**Note: Jeśli jakaś dana funkcjonalność źle działa to przez moje złe zinterpretowanie jak to powinno poprawnie działać.**
+**Note: If any given functionality does not work properly, it is due to my misinterpretation of how it should work properly.**
